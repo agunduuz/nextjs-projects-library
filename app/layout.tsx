@@ -4,6 +4,7 @@ import './globals.css';
 import { Providers } from './providers';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { MobileSidebar } from '@/components/layout/MobileSidebar';
 
 const jost = Jost({
   subsets: ['latin'],
@@ -45,6 +46,7 @@ export default function RootLayout({
         <Providers>
           <div className="min-h-screen bg-gray-50 dark:bg-secondary-900">
             <Header />
+            <MobileSidebar />
             <main className="container mx-auto px-4 py-8">{children}</main>
             <Footer />
           </div>

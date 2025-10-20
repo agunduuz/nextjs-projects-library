@@ -11,7 +11,7 @@ export const projectsData: Project[] = [
     technologies: ['HTML', 'CSS', 'JavaScript'],
     difficulty: 'beginner',
     skills: ['DOM manipülasyonu', 'localStorage', 'Event handling'],
-    status: 'not-started',
+    status: 'completed',
   },
   {
     id: 'project-002',

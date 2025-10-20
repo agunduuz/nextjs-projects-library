@@ -255,14 +255,14 @@ export default function HomePage() {
             {filteredProjects.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 auto-rows-auto">
                 {filteredProjects.map((project, index) => {
-                  const isLarge = (index + 1) % 7 === 0;
+                  const isLarge = (index + 1) % 5 === 0;
                   return (
                     <div
                       key={project.id}
                       className={`${
                         isLarge
-                          ? 'sm:col-span-2 lg:col-span-2 sm:row-span-2'
-                          : 'col-span-1'
+                          ? 'sm:col-span-1 lg:col-span-2 sm:row-span-1'
+                          : 'col-span-1 row-span-1'
                       }`}
                     >
                       <ProjectCard project={project} isLarge={isLarge} />

@@ -1,4 +1,3 @@
-// components/projects/ProjectCard.tsx
 'use client';
 
 import React from 'react';
@@ -13,11 +12,7 @@ import {
   CardTitle,
 } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
-import {
-  getCategoryBadgeColor,
-  getCategoryLabel,
-  getDifficultyColor,
-} from '@/lib/utils';
+import { getDifficultyColor, getCategoryLabel } from '@/lib/utils';
 import { Circle, ArrowRight } from 'lucide-react';
 
 interface ProjectCardProps {
@@ -38,44 +33,43 @@ export function ProjectCard({ project, isLarge = false }: ProjectCardProps) {
       className="group block h-full focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded-xl"
       aria-label={`${project.title} projesini görüntüle - Gün ${project.day}`}
     >
-      <Card
-        className={`h-full transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-lg group-hover:border-primary-300 dark:group-hover:border-primary-700 ${
-          isLarge ? 'p-8' : ''
-        }`}
-      >
-        <CardHeader>
+      <Card className="h-full flex flex-col transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-xl group-hover:border-primary-400 dark:group-hover:border-primary-600 group-hover:-translate-y-1">
+        {/* Header - Sabit Yükseklik */}
+        <CardHeader className="flex-shrink-0 pb-2">
           <div className="mb-3 flex items-center justify-between">
-            <span className="text-xs font-semibold text-secondary-700 dark:text-primary-400">
+            <span
+              className={`text-xs font-semibold text-primary-600 dark:text-primary-400 ${
+                isLarge ? 'text-sm' : ''
+              }`}
+            >
               GÜN {project.day}
             </span>
-            <div className="flex items-center gap-2">
-              <span
-                className={`text-xs font-medium px-2 py-1 rounded-full border ${getCategoryBadgeColor(project.category)}`}
-              >
-                {getCategoryLabel(project.category)}
-              </span>
-
-              <Badge variant={statusVariant[project.status]}>
-                {project.status === 'not-started' && 'Başlanmadı'}
-                {project.status === 'in-progress' && 'Devam Ediyor'}
-                {project.status === 'completed' && 'Tamamlandı'}
-              </Badge>
-            </div>
+            <Badge variant={statusVariant[project.status]}>
+              {project.status === 'not-started' && 'Başlanmadı'}
+              {project.status === 'in-progress' && 'Devam Ediyor'}
+              {project.status === 'completed' && 'Tamamlandı'}
+            </Badge>
           </div>
 
-          <CardTitle className="group-hover:text-secondary-700 dark:group-hover:text-primary-400 transition-colors">
+          {/* Başlık - 2 satır max */}
+          <CardTitle
+            className={`group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors line-clamp-2 min-h-[1.5rem] mb-2`}
+          >
             {project.title}
           </CardTitle>
-          <CardDescription className={isLarge ? 'text-base' : ''}>
+
+          {/* Açıklama - 3 satır max */}
+          <CardDescription className={`line-clamp-1 min-h-[0.5rem]`}>
             {project.description}
           </CardDescription>
         </CardHeader>
 
-        <CardContent className="space-y-4">
+        {/* Content - Flex grow ile boş alanı doldur */}
+        <CardContent className="flex-grow py-0">
           {/* Teknolojiler */}
-          <div>
+          <div className="pt-4 pb-6 border-t border-gray-100 dark:border-secondary-700">
             <p
-              className={`mb-2 text-xs font-medium text-secondary-700 dark:text-secondary-300 ${
+              className={`mb-3 text-xs font-semibold text-secondary-500 dark:text-secondary-400 uppercase tracking-wider ${
                 isLarge ? 'text-sm' : ''
               }`}
             >
@@ -94,29 +88,10 @@ export function ProjectCard({ project, isLarge = false }: ProjectCardProps) {
               )}
             </div>
           </div>
-
-          {/* Kazanımlar */}
-          {isLarge && (
-            <div>
-              <p className="mb-2 text-sm font-medium text-secondary-700 dark:text-secondary-300">
-                Kazanımlar
-              </p>
-              <ul className="space-y-2">
-                {project.skills.map((skill, index) => (
-                  <li
-                    key={index}
-                    className="text-sm text-secondary-600 dark:text-secondary-300 flex items-start"
-                  >
-                    <span className="mr-2 text-primary-500">•</span>
-                    {skill}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
         </CardContent>
 
-        <CardFooter className="justify-between items-center">
+        {/* Footer - Sabit Yükseklik */}
+        <CardFooter className="flex-shrink-0 justify-between items-center mt-auto pt-6 border-t border-gray-100 dark:border-secondary-700">
           <span
             className={`text-xs font-medium px-3 py-1.5 rounded-full flex items-center gap-1.5 ${getDifficultyColor(project.difficulty)}`}
           >
@@ -133,7 +108,8 @@ export function ProjectCard({ project, isLarge = false }: ProjectCardProps) {
             {project.difficulty === 'intermediate' && 'Orta'}
             {project.difficulty === 'advanced' && 'İleri'}
           </span>
-          <ArrowRight className="w-4 h-4 text-secondary-400 group-hover:text-secondary-700 dark:group-hover:text-primary-500 transition-all" />
+
+          <ArrowRight className="w-4 h-4 text-secondary-400 group-hover:text-primary-500 group-hover:translate-x-1 transition-all" />
         </CardFooter>
       </Card>
     </Link>

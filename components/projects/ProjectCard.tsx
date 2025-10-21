@@ -12,7 +12,7 @@ import {
   CardTitle,
 } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
-import { getDifficultyColor, getCategoryLabel } from '@/lib/utils';
+import { getDifficultyColor } from '@/lib/utils';
 import { Circle, ArrowRight } from 'lucide-react';
 
 interface ProjectCardProps {

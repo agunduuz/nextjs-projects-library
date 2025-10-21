@@ -39,10 +39,10 @@ export function trapFocus(element: HTMLElement) {
 
 // Kontrast kontrolü
 export function checkContrast(
-  foreground: string,
-  background: string
+  _foreground: string, // _ prefix = intentionally unused
+  _background: string
 ): 'AAA' | 'AA' | 'fail' {
-  // Basitleştirilmiş versiyon - production'da daha detaylı hesaplama yapılmalı
-  // WCAG 2.1 standartlarına göre kontrol
-  return 'AA'; // Placeholder
+  // TODO: WCAG 2.1 standartlarına göre kontrol implementasyonu
+  // Şimdilik placeholder
+  return 'AA';
 }

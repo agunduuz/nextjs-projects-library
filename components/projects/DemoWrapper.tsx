@@ -2,22 +2,23 @@
 
 import dynamic from 'next/dynamic';
 import { Sparkles } from 'lucide-react';
+import { ComponentType } from 'react';
 
 interface DemoWrapperProps {
   projectId: string;
 }
 
 // Proje ID'sinden component'e map
-const projectComponents: Record<string, any> = {
+const projectComponents: Record<
+  string,
+  () => Promise<{ default: ComponentType }>
+> = {
   'project-001': () => import('@/components/projects/Project001'),
-  // Diğer projeler buraya eklenecek
 };
 
 export function DemoWrapper({ projectId }: DemoWrapperProps) {
-  // Component loader'ı al
   const componentLoader = projectComponents[projectId];
 
-  // Eğer component yoksa, boş döndür
   if (!componentLoader) {
     return (
       <div className="w-full p-8 text-center rounded-xl border-2 border-dashed border-gray-300 dark:border-secondary-700 bg-gray-50 dark:bg-secondary-800/50">

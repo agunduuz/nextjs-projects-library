@@ -14,6 +14,7 @@ const projectComponents: Record<
   () => Promise<{ default: ComponentType }>
 > = {
   'project-001': () => import('@/components/projects/Project001'),
+  'project-002': () => import('@/components/projects/Project002'),
 };
 
 export function DemoWrapper({ projectId }: DemoWrapperProps) {

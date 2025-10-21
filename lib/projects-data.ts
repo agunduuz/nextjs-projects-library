@@ -19,10 +19,15 @@ export const projectsData: Project[] = [
     title: 'Calculator App',
     description: 'Temel matematiksel işlemleri yapan hesap makinesi',
     category: 'fundamentals',
-    technologies: ['HTML', 'CSS', 'JavaScript'],
+    technologies: ['JavaScript', 'CSS', 'TypeScript'],
     difficulty: 'beginner',
-    skills: ['Olay yönetimi', 'UI mantığı', 'Fonksiyonlar'],
-    status: 'not-started',
+    skills: [
+      'Event handling',
+      'State management',
+      'Error handling',
+      'CSS Grid layout',
+    ],
+    status: 'completed',
   },
   {
     id: 'project-003',

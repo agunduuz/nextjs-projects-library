@@ -1,5 +1,5 @@
 // Hangi projelerin demosu var?
-const projectsWithDemo = ['project-001'];
+const projectsWithDemo = ['project-001', 'project-002'];
 
 /**
  * Projenin canlı demosu var mı kontrol et

@@ -2,12 +2,7 @@
 
 import Link from 'next/link';
 import { Home, Search, ArrowLeft } from 'lucide-react';
-import { Metadata } from 'next';
 
-export const metadata: Metadata = {
-  title: '404 - Sayfa Bulunamadı',
-  description: 'Aradığınız sayfa mevcut değil.',
-};
 export default function NotFoundPage() {
   return (
     <div className="min-h-screen flex items-center justify-center px-4 bg-gray-50 dark:bg-secondary-900">
@@ -43,14 +38,14 @@ export default function NotFoundPage() {
             Ana Sayfaya Dön
           </Link>
 
-          {/* Geri Git */}
-          <button
-            onClick={() => window.history.back()}
+          {/* Geri Git - Link olarak değiştirdik */}
+          <Link
+            href="/"
             className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg border border-gray-300 dark:border-secondary-700 bg-white dark:bg-secondary-800 text-secondary-700 dark:text-secondary-300 hover:bg-gray-50 dark:hover:bg-secondary-700 transition-colors font-medium group"
           >
             <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-            Geri Git
-          </button>
+            Ana Sayfaya Dön
+          </Link>
         </div>
 
         {/* Popüler Linkler */}

@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 // ARIA label oluşturucu
 export function createAriaLabel(text: string, context?: string): string {
   return context ? `${text} - ${context}` : text;
@@ -35,14 +36,4 @@ export function trapFocus(element: HTMLElement) {
       }
     }
   });
-}
-
-// Kontrast kontrolü
-export function checkContrast(
-  _foreground: string, // _ prefix = intentionally unused
-  _background: string
-): 'AAA' | 'AA' | 'fail' {
-  // TODO: WCAG 2.1 standartlarına göre kontrol implementasyonu
-  // Şimdilik placeholder
-  return 'AA';
 }

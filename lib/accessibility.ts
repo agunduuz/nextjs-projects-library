@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 // ARIA label oluşturucu
 export function createAriaLabel(text: string, context?: string): string {
   return context ? `${text} - ${context}` : text;

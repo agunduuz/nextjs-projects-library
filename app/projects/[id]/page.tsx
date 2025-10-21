@@ -21,12 +21,15 @@ import {
 } from 'lucide-react';
 import { getDifficultyColor, getCategoryLabel } from '@/lib/utils';
 
+interface PageProps {
+  params: Promise<{ id: string }>;
+}
+
 export async function generateMetadata({
   params,
-}: {
-  params: { id: string };
-}): Promise<Metadata> {
-  const project = getProjectById(params.id);
+}: PageProps): Promise<Metadata> {
+  const { id } = await params;
+  const project = getProjectById(id);
 
   // Proje bulunamazsa basit bir metadata döndür
   if (!project) {
@@ -37,7 +40,7 @@ export async function generateMetadata({
   }
 
   // Proje bulunduysa detaylı metadata oluştur
-  const projectUrl = `https://nextjs-projects-library.vercel.app/projects/${params.id}`;
+  const projectUrl = `https://nextjs-projects-library.vercel.app/projects/${id}`;
 
   return {
     title: `${project.title} - Gün ${project.day} | 100 Günlük Next.js Projesi`,
@@ -63,7 +66,7 @@ export async function generateMetadata({
       siteName: '100 Günlük Next.js Projesi',
       images: [
         {
-          url: `/og-images/${params.id}.png`, // Proje bazlı görsel (ileride)
+          url: `/og-images/${id}.png`, // Proje bazlı görsel (ileride)
           width: 1200,
           height: 630,
           alt: project.title,
@@ -77,7 +80,7 @@ export async function generateMetadata({
       title: `${project.title} - Gün ${project.day}`,
       description: project.description,
       creator: '@frontendanil',
-      images: [`/og-images/${params.id}.png`],
+      images: [`/og-images/${id}.png`],
     },
     robots: {
       index: true,
@@ -96,13 +99,10 @@ export async function generateMetadata({
   };
 }
 
-export default function ProjectDetailPage({
-  params,
-}: {
-  params: { id: string };
-}) {
+export default async function ProjectPage({ params }: PageProps) {
   // Projeyi bul
-  const project = getProjectById(params.id);
+  const { id } = await params;
+  const project = getProjectById(id);
 
   // Proje bulunamadıysa 404
   if (!project) {
@@ -110,7 +110,7 @@ export default function ProjectDetailPage({
   }
 
   // Canlı demo var mı kontrol et
-  const hasDemoAvailable = hasLiveDemo(params.id);
+  const hasDemoAvailable = hasLiveDemo(id);
 
   // Önceki ve sonraki projeleri bul
   const currentIndex = projectsData.findIndex(p => p.id === project.id);
@@ -134,7 +134,7 @@ export default function ProjectDetailPage({
     completed: 'Tamamlandı',
   };
 
-  const projectUrl = `https://nextjs-projects-library.vercel.app/projects/${params.id}`;
+  const projectUrl = `https://nextjs-projects-library.vercel.app/projects/${id}`;
   const jsonLd = generateProjectJsonLd(project, projectUrl);
 
   return (
@@ -180,7 +180,7 @@ export default function ProjectDetailPage({
         {/* 🎮 CANLI DEMO BÖLÜMÜ */}
         {hasDemoAvailable && (
           <section className="mb-12">
-            <DemoWrapper projectId={params.id} />
+            <DemoWrapper projectId={id} />
           </section>
         )}
 

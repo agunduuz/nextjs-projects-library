@@ -13,6 +13,7 @@ const jost = Jost({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://nextjs-projects-library.vercel.app'),
   title: '100 Günlük Next.js Projesi | Anıl Gündüz',
   description:
     '100 gün boyunca her gün bir proje geliştirerek Next.js, TypeScript ve modern web teknolojilerini öğrenme yolculuğu.',
@@ -47,7 +48,7 @@ export default function RootLayout({
           <div className="min-h-screen bg-gray-50 dark:bg-secondary-900">
             <Header />
             <MobileSidebar />
-            <main className="container mx-auto px-4 py-8">{children}</main>
+            <main className="container px-4 py-8 mx-auto">{children}</main>
             <Footer />
           </div>
         </Providers>

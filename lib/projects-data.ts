@@ -46,7 +46,7 @@ export const projectsData: Project[] = [
       'Conditional rendering',
       'Date formatting',
     ],
-    status: 'in-progress',
+    status: 'completed',
   },
   {
     id: 'project-004',

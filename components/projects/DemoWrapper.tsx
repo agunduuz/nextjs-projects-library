@@ -19,6 +19,11 @@ const projectComponents: Record<
 };
 
 export function DemoWrapper({ projectId }: DemoWrapperProps) {
+  console.log('🔍 ProjectId:', projectId); // ✅ EKLE
+  console.log(
+    '🔍 ComponentLoader:',
+    projectComponents[projectId] ? 'VAR ✅' : 'YOK ❌'
+  );
   const componentLoader = projectComponents[projectId];
 
   if (!componentLoader) {

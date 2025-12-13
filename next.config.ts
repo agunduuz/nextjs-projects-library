@@ -2,6 +2,16 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   // Workspace root uyarısını sustur
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'openweathermap.org',
+        port: '',
+        pathname: '/img/wn/**',
+      },
+    ],
+  },
   outputFileTracingRoot: undefined,
 
   // ESLint ve TypeScript kontrolleri

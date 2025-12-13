@@ -52,6 +52,8 @@ export function Forecast({ data }: ForecastProps) {
               src={getWeatherIconUrl(forecast.weather[0].icon)}
               alt={forecast.weather[0].description}
               className="w-16 h-16 mx-auto mb-2"
+              width={64}
+              height={64}
             />
 
             {/* Sıcaklık */}

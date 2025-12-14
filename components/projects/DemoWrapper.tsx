@@ -16,6 +16,8 @@ const projectComponents: Record<
   'project-001': () => import('@/components/projects/Project001'),
   'project-002': () => import('@/components/projects/Project002'),
   'project-003': () => import('@/components/projects/Project003'),
+  'project-004': () => import('@/components/projects/Project004'),
+  'project-005': () => import('@/components/projects/Project005'),
 };
 
 export function DemoWrapper({ projectId }: DemoWrapperProps) {

@@ -88,10 +88,15 @@ export const projectsData: Project[] = [
     title: 'QR Code Generator',
     description: "Text veya URL'den QR kod oluşturma uygulaması",
     category: 'fundamentals',
-    technologies: ['JavaScript', 'API'],
+    technologies: ['React', 'TypeScript'],
     difficulty: 'beginner',
-    skills: ['3rd party API', 'Image handling', 'Download functionality'],
-    status: 'not-started',
+    skills: [
+      'QR kod oluşturma',
+      'Image handling',
+      'Download functionality',
+      'Debounce',
+    ],
+    status: 'completed',
   },
   {
     id: 'project-007',

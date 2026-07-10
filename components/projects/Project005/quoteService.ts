@@ -1,17 +1,27 @@
 import { Quote } from './types';
 
-const API_BASE_URL = 'https://api.quotable.io';
+const API_BASE_URL = 'https://dummyjson.com';
 
 export async function fetchRandomQuote(): Promise<Quote> {
   try {
-    const response = await fetch(`${API_BASE_URL}/random`); // ✅ DÜZELTİLDİ
+    const response = await fetch(`${API_BASE_URL}/quotes/random`);
 
     if (!response.ok) {
       throw new Error('Alıntı getirilemedi');
     }
 
     const data = await response.json();
-    return data;
+
+    return {
+      _id: String(data.id),
+      content: data.quote,
+      author: data.author,
+      tags: [],
+      authorSlug: data.author.toLowerCase().replace(/\s+/g, '-'),
+      length: data.quote.length,
+      dateAdded: '',
+      dateModified: '',
+    };
   } catch (error) {
     console.error('Quote fetch error:', error);
     throw new Error('Alıntı yüklenirken bir hata oluştu');

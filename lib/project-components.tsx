@@ -5,6 +5,7 @@ const projectsWithDemo = [
   'project-003',
   'project-004',
   'project-005',
+  'project-006',
 ];
 
 /**

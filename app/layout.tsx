@@ -43,7 +43,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="tr" className={jost.variable} suppressHydrationWarning>
-      <body className="font-sans">
+      <body className="font-sans" suppressHydrationWarning>
         <Providers>
           <div className="min-h-screen bg-gray-50 dark:bg-secondary-900">
             <Header />

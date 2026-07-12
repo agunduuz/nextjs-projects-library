@@ -28,9 +28,20 @@ const VIEW_OPTIONS: { value: EditorView; label: string; icon: typeof Pencil }[] 
   { value: 'preview', label: 'Önizleme', icon: Eye },
 ];
 
+// Mobilde "Bölünmüş" görünüm yan yana değil alt alta dizildiği için anlamsız
+const MOBILE_VIEW_OPTIONS = VIEW_OPTIONS.filter(
+  option => option.value !== 'split'
+);
+
 export function MarkdownEditor() {
   const [markdown, setMarkdown] = useState(DEFAULT_MARKDOWN);
-  const [view, setView] = useState<EditorView>('split');
+  // Bu bileşen her zaman client-only render edilir (ssr: false), bu yüzden
+  // ilk state'te window kontrolü hydration uyuşmazlığı yaratmaz
+  const [view, setView] = useState<EditorView>(() =>
+    typeof window !== 'undefined' && window.innerWidth < 640
+      ? 'edit'
+      : 'split'
+  );
   const [copied, setCopied] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -139,8 +150,8 @@ export function MarkdownEditor() {
       </div>
 
       {/* Toolbar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 p-3 mb-3 bg-white border border-gray-200 dark:bg-secondary-800 dark:border-secondary-700 rounded-xl">
-        <div className="flex flex-wrap gap-1">
+      <div className="flex flex-col gap-2 p-2 mb-3 bg-white border border-gray-200 dark:bg-secondary-800 dark:border-secondary-700 rounded-xl sm:flex-row sm:items-center sm:justify-between sm:gap-3 sm:p-3">
+        <div className="flex gap-1 overflow-x-auto -mx-1 px-1">
           {toolbarButtons.map(({ icon: Icon, label, action }) => (
             <button
               key={label}
@@ -148,20 +159,20 @@ export function MarkdownEditor() {
               onClick={action}
               title={label}
               aria-label={label}
-              className="flex items-center justify-center transition-colors rounded-lg touch-manipulation w-9 h-9 sm:w-10 sm:h-10 text-secondary-600 dark:text-secondary-300 hover:bg-gray-100 dark:hover:bg-secondary-700"
+              className="flex items-center justify-center flex-shrink-0 transition-colors rounded-lg touch-manipulation w-10 h-10 sm:w-10 sm:h-10 text-secondary-600 dark:text-secondary-300 hover:bg-gray-100 dark:hover:bg-secondary-700"
             >
               <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
           ))}
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center justify-end gap-2 pt-2 border-t border-gray-100 dark:border-secondary-700 sm:justify-start sm:pt-0 sm:border-t-0 sm:border-l sm:pl-3 sm:dark:border-secondary-700">
           <button
             type="button"
             onClick={handleCopy}
             title="Panoya kopyala"
             aria-label="Panoya kopyala"
-            className="flex items-center justify-center transition-colors rounded-lg touch-manipulation w-9 h-9 sm:w-10 sm:h-10 text-secondary-600 dark:text-secondary-300 hover:bg-gray-100 dark:hover:bg-secondary-700"
+            className="flex items-center justify-center transition-colors rounded-lg touch-manipulation w-10 h-10 text-secondary-600 dark:text-secondary-300 hover:bg-gray-100 dark:hover:bg-secondary-700"
           >
             {copied ? (
               <Check className="w-4 h-4 text-green-500 sm:w-5 sm:h-5" />
@@ -174,33 +185,34 @@ export function MarkdownEditor() {
             onClick={handleDownload}
             title=".md olarak indir"
             aria-label=".md olarak indir"
-            className="flex items-center justify-center transition-colors rounded-lg touch-manipulation w-9 h-9 sm:w-10 sm:h-10 text-secondary-600 dark:text-secondary-300 hover:bg-gray-100 dark:hover:bg-secondary-700"
+            className="flex items-center justify-center transition-colors rounded-lg touch-manipulation w-10 h-10 text-secondary-600 dark:text-secondary-300 hover:bg-gray-100 dark:hover:bg-secondary-700"
           >
             <Download className="w-4 h-4 sm:w-5 sm:h-5" />
           </button>
         </div>
       </div>
 
-      {/* View Toggle */}
+      {/* View Toggle - Mobil (ikon + kısa etiket, 2 seçenek) */}
       <div className="flex gap-2 mb-4 sm:hidden">
-        {VIEW_OPTIONS.map(option => (
+        {MOBILE_VIEW_OPTIONS.map(option => (
           <button
             key={option.value}
             type="button"
             onClick={() => setView(option.value)}
-            className={`flex-1 flex items-center justify-center gap-1.5 min-h-[44px] px-3 py-2 rounded-lg text-sm font-medium transition-colors touch-manipulation ${
+            className={`flex-1 flex items-center justify-center gap-1.5 min-h-[44px] px-2 py-2 rounded-lg text-sm font-medium transition-colors touch-manipulation ${
               view === option.value
                 ? 'bg-primary-500 text-white dark:bg-primary-600'
                 : 'bg-gray-100 dark:bg-secondary-700 text-secondary-700 dark:text-secondary-300'
             }`}
             aria-pressed={view === option.value}
           >
-            <option.icon className="w-4 h-4" />
+            <option.icon className="w-4 h-4 flex-shrink-0" />
             {option.label}
           </button>
         ))}
       </div>
 
+      {/* View Toggle - Desktop (3 seçenek) */}
       <div className="hidden gap-2 mb-4 sm:flex">
         {VIEW_OPTIONS.map(option => (
           <button

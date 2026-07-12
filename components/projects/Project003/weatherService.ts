@@ -8,7 +8,7 @@ console.log('API_KEY:', API_KEY ? 'Var ✅' : 'YOK ❌');
 // Şehir adına göre hava durumu
 export async function getWeatherByCity(city: string): Promise<WeatherData> {
   const response = await fetch(
-    `${BASE_URL}/weather?q=${city}&appid=${API_KEY}&units=metric&lang=tr`
+    `${BASE_URL}/weather?q=${encodeURIComponent(city)}&appid=${API_KEY}&units=metric&lang=tr`
   );
 
   if (!response.ok) {
@@ -40,7 +40,7 @@ export async function getWeatherByCoords(
 // 5 günlük tahmin
 export async function getForecast(city: string): Promise<ForecastData> {
   const response = await fetch(
-    `${BASE_URL}/forecast?q=${city}&appid=${API_KEY}&units=metric&lang=tr`
+    `${BASE_URL}/forecast?q=${encodeURIComponent(city)}&appid=${API_KEY}&units=metric&lang=tr`
   );
 
   if (!response.ok) {

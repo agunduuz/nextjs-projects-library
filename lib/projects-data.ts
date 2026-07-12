@@ -104,7 +104,7 @@ export const projectsData: Project[] = [
     title: 'Markdown Editor',
     description: 'Canlı önizleme ile markdown editörü',
     category: 'fundamentals',
-    technologies: ['JavaScript', 'React'],
+    technologies: ['React', 'TypeScript'],
     difficulty: 'intermediate',
     skills: [
       'Markdown parsing',
@@ -112,7 +112,7 @@ export const projectsData: Project[] = [
       'Textarea handling',
       'State management',
     ],
-    status: 'not-started',
+    status: 'completed',
   },
   {
     id: 'project-008',
